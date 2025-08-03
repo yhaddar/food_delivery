@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/constants/colors.dart' as colors;
-import 'package:food_delivery/core/constants/colors.dart' as colors;
-import 'package:food_delivery/shared/widgets/custom_button.dart';
+import 'package:food_delivery/features/auth/authentication_controller.dart';
+import 'package:food_delivery/features/auth/ui/login_screen.dart';
+import 'package:food_delivery/shared/widgets/buttons/custom_button.dart';
 import 'package:food_delivery/shared/widgets/custom_input.dart';
-
-import '../../../shared/widgets/custom_2oauth.dart';
 import '../../../shared/widgets/custom_auth_hero.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -21,7 +18,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final _numberController = TextEditingController();
+
+  List<Map<String, String>> errors = [];
 
   void login() async {
     print(
@@ -46,13 +44,9 @@ class _SignupScreenState extends State<SignupScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomAuthHero(
-                "Sign Up",
-                "please sign up to get started",
-              ),
+              CustomAuthHero("Sign Up", "please sign up to get started"),
               Container(
                 width: MediaQuery.of(context).size.width,
-                // height: MediaQuery.of(context).size.height,
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -71,7 +65,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Icons.person_outline,
                       false,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 18),
                     CustomInput(
                       _emailController,
                       "Enter your email",
@@ -79,7 +73,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Icons.email_outlined,
                       false,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 18),
                     CustomInput(
                       _passwordController,
                       "Enter your password",
@@ -87,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Icons.lock_outline,
                       true,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 18),
                     CustomInput(
                       _confirmPasswordController,
                       "Confirm your password",
@@ -95,9 +89,51 @@ class _SignupScreenState extends State<SignupScreen> {
                       Icons.lock_outline,
                       true,
                     ),
-                    SizedBox(height: 24),
-                    CustomButton("Log In", login()),
-                    SizedBox(height: 24),
+                    SizedBox(height: 22),
+                    CustomButton(
+                      "Sign Up",
+                      AuthenticationController(
+                        _emailController.text,
+                        _passwordController.text,
+                        _nameController.text,
+                        _confirmPasswordController.text,
+                      ).signUp,
+                    ),
+                    SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have account ?",
+                          style: TextStyle(
+                            color: colors.Colors.textDark2,
+                            fontSize: 14,
+                            fontFamily: 'NataSans',
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "log in".toUpperCase(),
+                            style: TextStyle(
+                              color: colors.Colors.textOrange,
+                              fontSize: 14,
+                              fontFamily: 'NataSans',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

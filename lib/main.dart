@@ -1,8 +1,13 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/features/starts/favorite_screen.dart';
 import 'package:food_delivery/firebase_options.dart';
+import 'package:food_delivery/core/constants/colors.dart' as colors;
 
-import 'features/auth/ui/login_screen.dart';
+import 'features/app_tree.dart';
+
 
 void main() async {
   // for activate the firebase with flutter using firebase core
@@ -29,7 +34,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: AnimatedSplashScreen(
+          splash: 'assets/gif/Food.gif',
+          nextScreen: FirebaseAuth.instance.currentUser == null ? FavoriteScreen() : AppTree(),
+        duration: 3000,
+        backgroundColor: colors.Colors.whiteColor,
+      ),
     );
   }
 }

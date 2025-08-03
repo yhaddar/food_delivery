@@ -14,4 +14,5 @@ class Colors {
   static Color blue = Color(0XFF1A2A80); // blue
   static Color red = Color(0XFFE52020); // red
   static Color dark = Color(0XFF222222); // dark 3
+  static Color gray = Color(0XFFEEEEEE); // grey
 }

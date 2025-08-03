@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery/features/auth/authentication_controller.dart';
 import 'package:food_delivery/features/auth/ui/signup_screen.dart';
 import 'package:food_delivery/shared/widgets/custom_auth_hero.dart';
 import 'package:food_delivery/core/constants/colors.dart' as colors;
-import 'package:food_delivery/shared/widgets/custom_button.dart';
+import 'package:food_delivery/shared/widgets/buttons/custom_button.dart';
 import 'package:food_delivery/shared/widgets/custom_input.dart';
 
 import '../../../shared/widgets/custom_2oauth.dart';
@@ -97,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     SizedBox(height: 24),
-                    CustomButton("Log In", login()),
+                    CustomButton("Log In", AuthenticationController(_emailController.text, _passwordController.text, null, null).login),
                     SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

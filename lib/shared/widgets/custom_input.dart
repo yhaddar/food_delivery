@@ -7,13 +7,16 @@ class CustomInput extends StatefulWidget {
   final String label;
   final IconData icon;
   final bool isPassword;
+  // final String error = null;
 
   const CustomInput(
     this.controller,
     this.hint,
     this.label,
     this.icon,
-    this.isPassword, {
+    this.isPassword,
+    // this.error,
+      {
     super.key,
   });
 
@@ -22,11 +25,8 @@ class CustomInput extends StatefulWidget {
 }
 
 class _CustomInputState extends State<CustomInput> {
-
   @override
   Widget build(BuildContext context) {
-
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,6 +40,7 @@ class _CustomInputState extends State<CustomInput> {
             letterSpacing: 2,
           ),
         ),
+        // Text(widget.error.toString()),
         SizedBox(height: 15),
         TextField(
           obscureText: widget.isPassword,

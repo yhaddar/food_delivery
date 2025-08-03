@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/core/constants/colors.dart' as colors;
 
 class CustomAuthHero extends StatelessWidget {
-
   final String title;
   final String description;
 
@@ -23,20 +22,19 @@ class CustomAuthHero extends StatelessWidget {
               color: colors.Colors.textWhite,
               fontFamily: 'Sora',
               fontSize: 25,
-              fontWeight: FontWeight.w900
+              fontWeight: FontWeight.w900,
             ),
           ),
-          SizedBox(height: 8,),
+          SizedBox(height: 8),
           Text(
             description,
             style: TextStyle(
               color: colors.Colors.textWhite,
               fontFamily: 'NataSans',
               fontSize: 15,
-              fontWeight: FontWeight.w300
+              fontWeight: FontWeight.w300,
             ),
           ),
-
         ],
       ),
     );

@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   firebase_core: ^4.0.0
   device_info_plus: ^11.5.0
+  firebase_auth: ^6.0.0
+  cloud_firestore: ^6.0.0
+  lottie: ^3.3.1
+  animated_splash_screen: ^1.3.0
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +67,7 @@ flutter:
   assets:
      - assets/images/
      - assets/icons/
+     - assets/gif/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -79,13 +84,14 @@ flutter:
     - family: Sora
       fonts:
         - asset: assets/fonts/Sora-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+
     - family: NataSans
       fonts:
         - asset: assets/fonts/NataSans-Regular.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
