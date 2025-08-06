@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/constants/colors.dart' as colors;
-import 'package:food_delivery/features/starts/favorite_screen.dart';
+import 'package:iconsax/iconsax.dart';
 
 class CustomAppbar extends StatelessWidget {
   final String title;
@@ -22,21 +22,21 @@ class CustomAppbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(
+            width: 35,
+            height: 35,
+            child: Image.asset("assets/icons/logo.png"),
+          ),
           Text(
             title.toString(),
             style: TextStyle(
               color: colors.Colors.textDark,
               fontFamily: 'Sora',
-              fontSize: 22,
+              fontSize: 19,
               fontWeight: FontWeight.w900,
             ),
           ),
-          Icon(Icons.person_outline, size: 25, color: colors.Colors.textDark),
-          ElevatedButton(onPressed: () {
-            FirebaseAuth.instance.signOut();
-            Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen()));
-          },
-              child: Icon(Icons.logout)),
+          Icon(Iconsax.shop, size: 25, color: colors.Colors.textDark),
         ],
       ),
     );

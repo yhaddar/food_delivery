@@ -15,4 +15,5 @@ class Colors {
   static Color red = Color(0XFFE52020); // red
   static Color dark = Color(0XFF222222); // dark 3
   static Color gray = Color(0XFFEEEEEE); // grey
+  static Color blackOpacity = Color.fromRGBO(0, 0, 0, 0.62); // black for images
 }

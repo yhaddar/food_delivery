@@ -1,17 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:food_delivery/features/app_tree.dart';
+import 'package:food_delivery/features/home/ui/home_screen.dart';
 
 class AuthenticationController {
   final String _email;
   final String _password;
   final String? _name;
   final String? _confirmPassword;
+  final BuildContext context;
 
   AuthenticationController(
     this._email,
     this._password,
     this._name,
     this._confirmPassword,
+    this.context,
   );
 
   Future<void> signUp() async {
@@ -44,10 +50,15 @@ class AuthenticationController {
 
   Future<void> login() async {
     try {
-
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-
-    } on FirebaseAuthException catch(e){
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _email,
+        password: _password,
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AppTree()),
+      );
+    } on FirebaseAuthException catch (e) {
       print(e);
     }
   }

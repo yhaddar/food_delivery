@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     SizedBox(height: 24),
-                    CustomButton("Log In", AuthenticationController(_emailController.text, _passwordController.text, null, null).login),
+                    CustomButton("Log In", AuthenticationController(_emailController.text, _passwordController.text, null, null, context).login),
                     SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
