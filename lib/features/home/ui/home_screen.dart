@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/shared/widgets/custom_category.dart';
 
 import '../../../shared/widgets/custom_recipe.dart';
 import '../../../shared/widgets/custom_recipe_cart.dart';
 import 'hero_screen.dart';
+import 'package:food_delivery/core/constants/colors.dart' as colors;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,47 +16,63 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   Future<List<Map<String, dynamic>>> getLatestRecipes() async {
-    final recipes = await FirebaseFirestore.instance.collection("recipes").orderBy("created_at", descending: true).limit(10).get();
+    final recipes = await FirebaseFirestore.instance
+        .collection("recipes")
+        .orderBy("created_at", descending: true)
+        .limit(10)
+        .get();
 
     List<Map<String, dynamic>> allRecipe = [];
 
-    for(var recipe in recipes.docs){
-
+    for (var recipe in recipes.docs) {
       final r = recipe.data();
 
+      final category = await FirebaseFirestore.instance
+          .collection("categories")
+          .where("id", isEqualTo: r["category_id"])
+          .get();
 
-      final category = await FirebaseFirestore.instance.collection("categories").where("id", isEqualTo: r["category_id"]).get();
-
-
-      allRecipe.add({
-        "recipe": r,
-        "category": category.docs.first.data()
-      });
+      allRecipe.add({"recipe": r, "category": category.docs.first.data()});
     }
     return allRecipe;
   }
 
   Future<List<Map<String, dynamic>>> getRecipeWithCategory(int category) async {
-    final recipes = await FirebaseFirestore.instance.collection("recipes").where("category_id", isEqualTo: category).limit(10).get();
+    final recipes = await FirebaseFirestore.instance
+        .collection("recipes")
+        .where("category_id", isEqualTo: category)
+        .limit(10)
+        .get();
 
     List<Map<String, dynamic>> allRecipe = [];
 
-    for(var recipe in recipes.docs){
-
+    for (var recipe in recipes.docs) {
       final r = recipe.data();
 
+      final category = await FirebaseFirestore.instance
+          .collection("categories")
+          .where("id", isEqualTo: r["category_id"])
+          .get();
 
-      final category = await FirebaseFirestore.instance.collection("categories").where("id", isEqualTo: r["category_id"]).get();
-
-
-      allRecipe.add({
-        "recipe": r,
-        "category": category.docs.first.data()
-      });
+      allRecipe.add({"recipe": r, "category": category.docs.first.data()});
     }
     return allRecipe;
+  }
+
+  Future<String> GetUserName() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final name = await FirebaseFirestore.instance
+        .collection("users")
+        .where("user_id", isEqualTo: uid)
+        .get();
+    print(name.docs.first.data()["name"]);
+    return name.docs.first.data()["name"].toString();
+  }
+
+  String GetDateToday() {
+    DateTime dateTime = DateTime.now();
+    return dateTime.hour > 6 && dateTime.hour < 12 ? "Good Morning" : "Good Evening";
   }
 
   @override
@@ -62,6 +80,37 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FutureBuilder(
+                future: GetUserName(),
+                builder: (context, snapshot) {
+                  return Text(
+                    "Hey ${snapshot.data ?? '...'}, ",
+                    style: TextStyle(
+                      color: colors.Colors.textDark,
+                      fontFamily: "Sora",
+                      fontSize: 16,
+                    ),
+                  );
+                },
+              ),
+              Text(
+                GetDateToday(),
+                style: TextStyle(
+                  color: colors.Colors.textDark,
+                  fontFamily: "Sora",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20),
         HeroScreen(),
         SizedBox(height: 30),
         CustomCategory(),

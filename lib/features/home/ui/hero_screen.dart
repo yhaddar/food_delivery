@@ -65,7 +65,7 @@ class _HeroScreenState extends State<HeroScreen> {
             height: 200,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
-              itemCount: results.length,
+              itemCount: snapshot.data!.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Container(

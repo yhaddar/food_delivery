@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/core/constants/colors.dart' as colors;
 import 'package:iconsax/iconsax.dart';
 
+import '../../features/starts/favorite_screen.dart';
+
 class CustomAppbar extends StatelessWidget {
   final String title;
 
@@ -36,7 +38,13 @@ class CustomAppbar extends StatelessWidget {
               fontWeight: FontWeight.w900,
             ),
           ),
-          Icon(Iconsax.shop, size: 25, color: colors.Colors.textDark),
+          InkWell(
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen()));
+            },
+            child: Icon(Iconsax.logout, size: 25, color: colors.Colors.textDark),
+          )
         ],
       ),
     );

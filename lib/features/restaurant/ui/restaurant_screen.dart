@@ -8,8 +8,8 @@ class RestaurantScreen extends StatelessWidget {
   const RestaurantScreen({super.key});
 
   void activateLocation() async {
-    LocationPermission locationPermission = await Geolocator.checkPermission();
-    print(LocationPermission.denied);
+    // LocationPermission locationPermission = await Geolocator.checkPermission();
+    // print(LocationPermission.denied);
   }
 
   @override

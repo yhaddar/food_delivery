@@ -25,7 +25,7 @@ class CustomRecipeCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final VerifierIfExist verifierIfExist = Get.put(VerifierIfExist(id));
+    final VerifierIfExist2 verifierIfExist2 = Get.put(VerifierIfExist2(id));
     return Obx(
       () => Material(
         elevation: 1,
@@ -59,12 +59,12 @@ class CustomRecipeCart extends StatelessWidget {
 
                   InkWell(
                     onTap: () async => {
-                      if (verifierIfExist.exist.value)
+                      if (verifierIfExist2.exist.value)
                         {FavoriteController.addFavoriteToCategory(id)}
                       else
                         {FavoriteController.removeRecipeFromFavorite(id)},
 
-                      await verifierIfExist.checkExist()
+                      await verifierIfExist2.checkExist()
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -76,7 +76,7 @@ class CustomRecipeCart extends StatelessWidget {
                             color: colors.Colors.whiteColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: !verifierIfExist.exist.value
+                          child: !verifierIfExist2.exist.value
                               ? Icon(Iconsax.heart5, color: colors.Colors.red)
                               : Icon(Iconsax.heart),
                         ),
@@ -158,11 +158,11 @@ class CustomRecipeCart extends StatelessWidget {
   }
 }
 
-class VerifierIfExist extends GetxController {
+class VerifierIfExist2 extends GetxController {
   RxBool exist = false.obs;
   final int id;
 
-  VerifierIfExist(this.id);
+  VerifierIfExist2(this.id);
 
   @override
   void onInit() {

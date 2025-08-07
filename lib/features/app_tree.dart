@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../shared/widgets/custom_appbar.dart';
+import 'food/ui/food_screen.dart';
 import 'home/ui/home_screen.dart';
 
 class AppTree extends StatelessWidget {
@@ -61,7 +62,7 @@ class NavigationController extends GetxController {
   final Rx<int> _selectedItem = 0.obs;
   final screens = [
     HomeScreen(),
-    SettingScreen(),
+    FoodScreen(),
     RestaurantScreen(),
     HomeScreen(),
     SettingScreen(),
