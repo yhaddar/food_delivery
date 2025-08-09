@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../shared/widgets/custom_appbar.dart';
+import 'favorite/ui/favorite_screen.dart';
 import 'food/ui/food_screen.dart';
 import 'home/ui/home_screen.dart';
 
@@ -40,16 +41,16 @@ class AppTree extends StatelessWidget {
             NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
             NavigationDestination(icon: Icon(Iconsax.receipt), label: 'Food'),
             NavigationDestination(
+              icon: Icon(Iconsax.receipt_add),
+              label: 'Add Recipe',
+            ),
+            NavigationDestination(
               icon: Icon(Iconsax.menu_board),
               label: 'Restaurant',
             ),
             NavigationDestination(
               icon: Icon(Iconsax.heart),
               label: 'Favorite',
-            ),
-            NavigationDestination(
-              icon: Icon(Iconsax.setting),
-              label: 'Setting',
             ),
           ],
         ),
@@ -64,8 +65,8 @@ class NavigationController extends GetxController {
     HomeScreen(),
     FoodScreen(),
     RestaurantScreen(),
-    HomeScreen(),
-    SettingScreen(),
+    FavoriteScreen(),
+    FavoriteScreen(),
   ];
 }
 

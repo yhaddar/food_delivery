@@ -5,7 +5,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../features/favorite/favorite_controller.dart';
 
-class CustomRecipeCart2 extends StatelessWidget {
+class CustomRecipeCart2 extends StatefulWidget {
   final String image;
   final String title;
   final String category;
@@ -26,8 +26,14 @@ class CustomRecipeCart2 extends StatelessWidget {
   });
 
   @override
+  State<CustomRecipeCart2> createState() => _CustomRecipeCart2State();
+}
+
+class _CustomRecipeCart2State extends State<CustomRecipeCart2> {
+
+  @override
   Widget build(BuildContext context) {
-    final VerifierIfExist verifierIfExist = Get.put(VerifierIfExist(id));
+    final VerifierIfExist verifierIfExist = Get.put(VerifierIfExist(widget.id));
     return Material(
       elevation: 1,
       borderRadius: BorderRadius.circular(8),
@@ -49,7 +55,7 @@ class CustomRecipeCart2 extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: AssetImage("assets/images/recipes/$image"),
+                      image: AssetImage("assets/images/recipes/${widget.image}"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -71,9 +77,19 @@ class CustomRecipeCart2 extends StatelessWidget {
                         color: colors.Colors.whiteColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: !verifierIfExist.exist.value
-                          ? Icon(Iconsax.heart5, color: colors.Colors.red)
-                          : Icon(Iconsax.heart),
+                      child: InkWell(
+                        onTap: () async {
+                          if (verifierIfExist.exist.value)
+                          {FavoriteController.addFavoriteToCategory(widget.id);}
+                          else
+                          {FavoriteController.removeRecipeFromFavorite(widget.id);}
+
+                          await verifierIfExist.checkExist();
+                        },
+                        child: !verifierIfExist.exist.value
+                            ? Icon(Iconsax.heart5, color: colors.Colors.red)
+                            : Icon(Iconsax.heart),
+                      )
                     ),
                   ],
                 )
@@ -92,9 +108,9 @@ class CustomRecipeCart2 extends StatelessWidget {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: Text(
-                          title.length > 20
-                              ? "${title.substring(0, 20)}..."
-                              : title,
+                          widget.title.length > 20
+                              ? "${widget.title.substring(0, 20)}..."
+                              : widget.title,
                           style: TextStyle(
                             color: colors.Colors.textDark,
                             fontSize: 16,
@@ -107,9 +123,9 @@ class CustomRecipeCart2 extends StatelessWidget {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: Text(
-                          description.length > 95
-                              ? "${description.substring(0, 95)}..."
-                              : description,
+                          widget.description.length > 95
+                              ? "${widget.description.substring(0, 95)}..."
+                              : widget.description,
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             color: colors.Colors.textDark,
@@ -125,13 +141,13 @@ class CustomRecipeCart2 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "assets/icons/categories/$category_image",
+                        "assets/icons/categories/${widget.category_image}",
                         width: 32,
                         height: 32,
                       ),
                       SizedBox(width: 8),
                       Text(
-                        category,
+                        widget.category,
                         style: TextStyle(
                           color: colors.Colors.textDark,
                           fontSize: 15,
