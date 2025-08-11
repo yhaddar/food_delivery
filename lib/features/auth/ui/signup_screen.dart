@@ -101,7 +101,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         _passwordController.text,
                         _nameController.text,
                         _confirmPasswordController.text,
-                        context
+                        context,
                       ).signUp,
                     ),
                     SizedBox(height: 15),

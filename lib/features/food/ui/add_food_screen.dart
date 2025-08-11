@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/constants/colors.dart' as colors;
 import 'package:food_delivery/shared/widgets/buttons/custom_button.dart';
@@ -25,12 +27,6 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
   int? _category_selected = 0;
 
-  // void selectedCategory(int category){
-  //   setState(() {
-  //     _category_selected = category;
-  //   });
-  // }
-
   Stream<QuerySnapshot<Map<String, dynamic>>> getAllCategories() {
     final recipes = FirebaseFirestore.instance
         .collection("categories")
@@ -51,10 +47,34 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
         _image = File(_pickedImage.path);
       });
     }
+
   }
 
-  void addRecipe() {
-    print("hello world");
+  Future<void> addRecipe() async {
+
+    try {
+      // final imageRef = await FirebaseStorage.instance.ref("images").child("${titleController.text}.jpg");
+      // final uploadImage = await imageRef.putFile(_image!);
+      // final imageUrl = await uploadImage.ref.getDownloadURL();
+
+      final added = FirebaseFirestore.instance.collection("recipes").add({
+        "title": titleController.text,
+        "description": descriptionController.text,
+        "prep_time": prepTimeController.text,
+        "category_id": _category_selected,
+        "image": "no image",
+        "created_at": DateTime.now(),
+        "updated_at": DateTime.now(),
+        "user_id": FirebaseAuth.instance.currentUser!.uid
+      });
+
+      if(added != null){
+        print("success");
+      }
+    } on FirebaseException catch(e){
+      print(e.message);
+    }
+
   }
 
   @override
