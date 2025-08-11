@@ -1,32 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/constants/colors.dart' as colors;
 
-class CustomInput extends StatefulWidget {
+class CustomTextarea extends StatefulWidget {
   final TextEditingController controller;
   final String hint;
   final String label;
-  final IconData icon;
-  final bool isPassword;
-  final TextInputType keyboardType;
   // final String error = null;
 
-  const CustomInput(
+  const CustomTextarea(
     this.controller,
     this.hint,
-    this.label,
-    this.icon,
-    this.isPassword,
-    this.keyboardType,
+    this.label, {
     // this.error,
-      {
     super.key,
   });
 
   @override
-  State<CustomInput> createState() => _CustomInputState();
+  State<CustomTextarea> createState() => _CustomTextareaState();
 }
 
-class _CustomInputState extends State<CustomInput> {
+class _CustomTextareaState extends State<CustomTextarea> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,11 +38,11 @@ class _CustomInputState extends State<CustomInput> {
         // Text(widget.error.toString()),
         SizedBox(height: 15),
         TextField(
-          obscureText: widget.isPassword,
+          minLines: 5,
+          maxLines: null,
           controller: widget.controller,
-          keyboardType: widget.keyboardType,
+          keyboardType: TextInputType.multiline,
           decoration: InputDecoration(
-            prefixIcon: Icon(widget.icon),
             prefixIconColor: colors.Colors.textDark,
             hintText: widget.hint,
             border: OutlineInputBorder(
@@ -59,20 +52,6 @@ class _CustomInputState extends State<CustomInput> {
             focusedBorder: OutlineInputBorder(),
             filled: true,
             fillColor: colors.Colors.inputColor,
-            suffixIcon: widget.isPassword
-                ? FilledButton(
-                    onPressed: () {},
-                    style: FilledButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      padding: EdgeInsets.zero,
-                    ),
-                    child: Icon(
-                      Icons.remove_red_eye_sharp,
-                      size: 24,
-                      color: colors.Colors.textDark,
-                    ),
-                  )
-                : null,
           ),
         ),
       ],

@@ -64,6 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       "Name :",
                       Icons.person_outline,
                       false,
+                      TextInputType.text,
                     ),
                     SizedBox(height: 18),
                     CustomInput(
@@ -72,6 +73,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       "Email :",
                       Icons.email_outlined,
                       false,
+                      TextInputType.text,
                     ),
                     SizedBox(height: 18),
                     CustomInput(
@@ -80,6 +82,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       "Password :",
                       Icons.lock_outline,
                       true,
+                      TextInputType.text,
                     ),
                     SizedBox(height: 18),
                     CustomInput(
@@ -88,6 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       "Confirm Password :",
                       Icons.lock_outline,
                       true,
+                      TextInputType.text,
                     ),
                     SizedBox(height: 22),
                     CustomButton(

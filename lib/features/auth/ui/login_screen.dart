@@ -68,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Email :",
                       Icons.email_outlined,
                       false,
+                      TextInputType.text,
                     ),
                     SizedBox(height: 20),
                     CustomInput(
@@ -76,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Password :",
                       Icons.lock_outline,
                       true,
+                      TextInputType.text,
                     ),
                     SizedBox(height: 15),
                     Row(

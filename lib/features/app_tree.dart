@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../shared/widgets/custom_appbar.dart';
 import 'favorite/ui/favorite_screen.dart';
+import 'food/ui/add_food_screen.dart';
 import 'food/ui/food_screen.dart';
 import 'home/ui/home_screen.dart';
 
@@ -64,6 +65,7 @@ class NavigationController extends GetxController {
   final screens = [
     HomeScreen(),
     FoodScreen(),
+    AddFoodScreen(),
     RestaurantScreen(),
     FavoriteScreen(),
     FavoriteScreen(),

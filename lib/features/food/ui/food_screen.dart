@@ -5,8 +5,6 @@ import 'package:iconsax/iconsax.dart';
 import '../../../shared/widgets/custom_input.dart';
 
 class FoodScreen extends StatefulWidget {
-
-
   const FoodScreen({super.key});
 
   @override
@@ -46,36 +44,37 @@ class _FoodScreenState extends State<FoodScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           CustomInput(
-              searchController,
-              "search",
-              "Search for an Recipe",
-              Iconsax.search_favorite,
-              false
+            searchController,
+            "search",
+            "Search for an Recipe",
+            Iconsax.search_favorite,
+            false,
+            TextInputType.text,
           ),
-          SizedBox(height: 30,),
+          SizedBox(height: 30),
           FutureBuilder(
-              future: getAllRecipe(),
-              builder: (context, snapshot) {
-                if(snapshot.connectionState == ConnectionState.waiting){
-                  return Center(child: CircularProgressIndicator(),);
-                }
-                return Column(
-                  children: List.generate(snapshot.data!.length, (index) {
-                    return Container(
-                      margin: EdgeInsets.symmetric(vertical: 6),
-                      child: CustomRecipeCart2(
-                          snapshot.data![index]["recipe"]["image"],
-                          snapshot.data![index]["recipe"]["title"],
-                          snapshot.data![index]["category"]["title"],
-                          snapshot.data![index]["recipe"]["prep_time"],
-                          snapshot.data![index]["recipe"]["id"],
-                          snapshot.data![index]["category"]["image"],
-                          snapshot.data![index]["recipe"]["description"]
-                      ),
-                    );
-                  }),
-                );
-              },
+            future: getAllRecipe(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return Column(
+                children: List.generate(snapshot.data!.length, (index) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: 6),
+                    child: CustomRecipeCart2(
+                      snapshot.data![index]["recipe"]["image"],
+                      snapshot.data![index]["recipe"]["title"],
+                      snapshot.data![index]["category"]["title"],
+                      snapshot.data![index]["recipe"]["prep_time"],
+                      snapshot.data![index]["recipe"]["id"],
+                      snapshot.data![index]["category"]["image"],
+                      snapshot.data![index]["recipe"]["description"],
+                    ),
+                  );
+                }),
+              );
+            },
           ),
         ],
       ),
